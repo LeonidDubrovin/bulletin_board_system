@@ -5,7 +5,7 @@
 `python manage.py createsuperuser --username admin --email admin@admin.com`
 4. run app `make run`
 
-## Git комманды
+## Git команды
 ### сделать ветку и переключитья на неё
 `git checkout -b <name>`
 
