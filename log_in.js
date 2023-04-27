@@ -18,7 +18,7 @@ const xhr = new XMLHttpRequest()
 
 xhr.open('GET', url)
 
-xhr.responseType = 'json'
+//xhr.responseType = 'json'
 
 xhr.onload = () =>{
     console.log(xhr.response)
