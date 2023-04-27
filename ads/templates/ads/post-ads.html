@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="breadcrumb-wrapper">
+          <h2 class="product-title">Создание объявления</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="content" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-lg-5 col-md-12 col-xs-12">
+        {% if request.user.is_authenticated %}
+        <div class="row page-content">
+          <form action="" class="ads-form" id="ad-post-form">
+
+            <label>Название <span class="req-aseteric">*</span></label>
+            <input type="text" id="title" class="form-control ad-post-form"
+              placeholder="н.п. ноутбук">
+            <div class="error-msg">
+              <div id="titlemsg"></div>
+            </div>
+
+            <label>Описание <span class="req-aseteric">*</span></label>
+            <textarea rows="6" id="description" class="form-control ad-post-form"
+              placeholder="Постарайтесь сделать подробное описание"></textarea>
+            <div class="error-msg">
+              <div id="descriptionmsg"></div>
+            </div>
+
+            <label>Выберите категорию <span class="req-aseteric">*</span></label>
+            <div class="select ad-post-form">
+              <select id="category" name="category" class="form-control">
+                <option value="Books">Книги</option>
+                <option value="Tech">Бытовая техника</option>
+              </select>
+            </div>
+            <div class="error-msg">
+              <div id="categorymsg"></div>
+            </div>
+
+            <label>Цена <span class="req-aseteric">*</span> <span class="h-text"> (Только цифры)</span></label>
+            <input type="number" id="price" class="form-control ad-post-form" placeholder="н.п. 999">
+            <div class="error-msg">
+              <div id="pricemsg"></div>
+            </div>
+
+            <label>Выберите регион <span class="req-aseteric">*</span></label>
+            <div class="select ad-post-form">
+              <select id="region" name="region" class="form-control">
+                <option value="Tomsk">Томск</option>
+                <option value="NonTomsk">Нетомск</option>
+              </select>
+            </div>
+            <div class="error-msg">
+              <div id="regionmsg"></div>
+            </div>
+
+            <label>Город <span class="req-aseteric">*</span></label>
+            <input type="text" id="city" class="form-control ad-post-form" placeholder="н.п. Томск">
+            <div class="error-msg">
+              <div id="citymsg"></div>
+            </div>
+
+            <label>Номер телефона <span class="req-aseteric">*</span></label>
+            <input type="text" id="phone" class="form-control ad-post-form" placeholder="н.п. 8 800 000 00 00">
+            <div class="error-msg">
+              <div id="phonemsg"></div>
+            </div>
+
+            <label>Ссылка на видео</label>
+            <input type="url" id="video" class="form-control ad-post-form"
+              placeholder="н.п. https://www.youtube.com/watch?v=jNQXAC9IVRw">
+            {% comment %}<label>Картинки <span class="h-text"> (Максимум 5 штук. Размер должен быть меньше 3MB.
+               Допустимые типы: jpeg, jpg & png.) </span></label>{% endcomment %}
+
+            {% comment %}<input type="file" multiple>{% endcomment %}
+
+            <button type="button" id="saveBtn" class="btn btn-common log-btn">Отправить</button>
+          </form>
+        </div>
+
+        <div class="success-msg">
+          <div id="formsuccessmsg" class="text-center"></div>
+        </div>
+
+        <div class="error-msg">
+          <div id="formerrmsg" class="text-center"></div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+{% comment %}    var files = []
+    FilePond.registerPlugin(FilePondPluginFileValidateSize);
+    FilePond.registerPlugin(FilePondPluginFileValidateType);
+    FilePond.setOptions({
+      allowMultiple: true,
+      maxFiles: 5,
+      maxFileSize: '3MB'
+    })
+    const inputElement = document.querySelector('input[type="file"]');
+    const pond = FilePond.create(inputElement, {
+      acceptedFileTypes: ['image/png', 'image/jpeg'],
+      onaddfile: (err, fileItem) => {
+        if (!err) {
+          files.push(fileItem.file)
+        }
+        console.log(files)
+      },
+      onremovefile: (err, fileItem) => {
+        const index = files.indexOf(fileItem.file)
+        if (index > -1) {
+          files.splice(index, 1)
+        }
+        console.log(files)
+      }
+    });{% endcomment %}
+
+    var formData = new FormData();
+    $(document).on('click', '#saveBtn', function (e) {
+
+      if ($('#title').val() === "") {
+        $("#titlemsg").html("<div class='alert alert-danger'>Title can not be empty</div>");
+      }
+
+      if ($('#description').val() === "") {
+        $("#descriptionmsg").html("<div class='alert alert-danger'>Description can not be empty</div>");
+      }
+
+      if ($('#category').val() === "") {
+        $("#categorymsg").html("<div class='alert alert-danger'>Category can not be empty</div>");
+      }
+
+      if ($('#price').val() === "") {
+        $("#pricemsg").html("<div class='alert alert-danger'>Price can not be empty & must be numeric</div>");
+      }
+
+      if ($('#region').val() === "") {
+        $("#regionmsg").html("<div class='alert alert-danger'>Region can not be empty</div>");
+      }
+
+      if ($('#city').val() === "") {
+        $("#citymsg").html("<div class='alert alert-danger'>City can not be empty</div>");
+      }
+
+      if ($('#phone').val() === "") {
+        $("#phonemsg").html("<div class='alert alert-danger'>You must provide a phone no.</div>");
+      }
+
+
+      {% comment %}formData.append('file_count', files.length){% endcomment %}
+      formData.append('title', $('#title').val())
+      formData.append('description', $('#description').val())
+      formData.append('category', $('#category').val())
+      formData.append('price', $('#price').val())
+      formData.append('region', $('#region').val())
+      formData.append('city', $('#city').val())
+      formData.append('phone', $('#phone').val())
+      formData.append('video', $('#video').val())
+      {% comment %}for (var i = 0; i < files.length; i++) {
+        formData.append('images' + i, files[i])
+      }{% endcomment %}
+
+      formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url "post-ads" %}',
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        success: function () {
+          $("#formsuccessmsg").html(
+            "<div class='alert alert-success'>Объявление успешно добавлено и опубликуется после одобрения модератором.</div>"
+          );
+          $('#ad-post-form').each(function () {
+            this.reset();
+          });
+          
+        },
+        error: function (xhr, errmsg, err) {
+          $("#formerrmsg").html(
+            "<div class='alert alert-danger'>Есть одна или несколько ошибок в заполнении формы.</div>"
+          );
+          console.log(xhr.status + ":" + xhr.responseText)
+          alert('Ошибка отправки поста')
+
+        }
+      })
+    })
+    console.log(formData)
+  })
+</script>
+{% endblock content %}
