@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <!-- Page Header Start -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="breadcrumb-wrapper">
+            <h2 class="product-title">Настройки профиля</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page Header End -->
+
+  <!-- Start Content -->
+  <div id="content" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <!-- Account Sidebar -->
+        {% include 'profiles/account-sidebar.html' %}
+        <!-- Account Sidebar -->
+        <div class="col-sm-12 col-md-8 col-lg-9">
+          <div class="page-content">
+            <div class="inner-box">
+              <div class="tg-contactdetail">
+                <div class="dashboard-box">
+                  <h2 class="dashbord-title">Обновить профиль</h2>
+
+                </div>
+                <div class="dashboard-wrapper">
+                  <form id="" method="POST" action="" class="profile-form"
+                        enctype="multipart/form-data">
+                    <div class="dx-box-content">
+                      {% csrf_token %}
+                      {{ user_update_form }}
+                      {{ profile_update_form }}
+
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-common log-btn">
+                          Обновить профиль
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              {% if messages %}
+                <div class="error-msg">
+                  {% for message in messages %}
+                    <p class="error-text text-center">{{ message }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
