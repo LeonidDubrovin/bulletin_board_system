@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <!-- Page Header Start -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="breadcrumb-wrapper">
+            <h2 class="product-title">Личный кабинет</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page Header End -->
+
+  <!-- Start Content -->
+  <div id="content" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <!-- Account Sidebar -->
+        {% include 'profiles/account-sidebar.html' %}
+        <!-- Account Sidebar -->
+        <div class="col-sm-12 col-md-8 col-lg-9">
+          <div class="page-content">
+            <div class="inner-box">
+              <div class="dashboard-box">
+                <h2 class="dashbord-title">Личный кабинет</h2>
+              </div>
+              <div class="dashboard-wrapper">
+                <div class="dashboard-sections">
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="dashboardbox">
+                        <div class="icon"><i class="lni-write"></i></div>
+                        <div class="contentbox">
+                          <h2>Всего объявлений</h2>
+                          <h3>{{ total_ads }} объявлений</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="dashboardbox">
+                        <div class="icon"><i class="lni-add-files"></i></div>
+                        <div class="contentbox">
+                          <h2>Избранные объявления</h2>
+                          <h3>{{ featured_ads }} объявлений</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                      <div class="dashboardbox">
+                        <div class="icon"><i class="lni-support"></i></div>
+                        <div class="contentbox">
+                          <h2><a href="#">Offers / Messages</a></h2>
+                          <h3>2040 Messages</h3>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+                {% if ads_posted %}
+                  <table class="table table-responsive dashboardtable tablemyads">
+                    <thead>
+                    <tr>
+                      <!-- <th>Photo</th> -->
+                      <th>Название</th>
+                      <th>Категория</th>
+                      <th>Цена</th>
+                      <th>Дата публикации</th>
+                      <th>Статус</th>
+                      <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ad in ads_posted %}
+                      <tr data-category="active">
+
+                        <td data-title="Title">
+                          <h3>{{ ad.title }}</h3>
+                        </td>
+                        <td data-title="Category"><span
+                                class="adcategories">{{ ad.category }}</span>
+                        </td>
+                        <td data-title="Price">
+                          <h3>{{ ad.price }}</h3>
+                        </td>
+
+                        <td data-title="Date">
+                          <h3>{{ ad.date_created }}</h3>
+                        </td>
+                        <td data-title="Ad Status">
+                          {% if ad.is_active %}
+                            <span class="adstatus adstatusactive">Актив.</span>
+                          {% else %}
+                            <span class="adstatus adstatusinactive">Неактив.</span>
+                          {% endif %}
+                        </td>
+                        <td data-title="Action">
+                          <div class="btns-actions">
+                            <a class="btn-action btn-delete"
+                               href="{% url 'ads-delete' pk=ad.pk %}"><i
+                                    class="lni-trash"></i></a>
+                          </div>
+                        </td>
+
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Content -->
+
+
+{% endblock content %}

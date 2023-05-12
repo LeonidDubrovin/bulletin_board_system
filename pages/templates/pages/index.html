@@ -2,197 +2,161 @@
 {% load static %}
 {% block content %}
 
-<div id="hero-area">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-lg-12 col-xs-12 text-center">
-        <div class="contents">
-          <div class="search-bar">
-            <div class="search-inner">
-              <form method="GET" class="search-form" action="{% url 'ads-search' %}">
-                <!-- <div class="form-group inputwithicon">
-                  <i class="lni-tag"></i>
-                  <input type="text" name="customword" class="form-control" placeholder="Enter Product Keyword">
-                </div> -->
-                <div class="form-group inputwithicon">
-                  <i class="lni-map-marker"></i>
-                  <div class="select">
-                    <select name="region_name">
-                      <option selected="true" disabled="disabled">Регион</option>
-                      {% for region_name in region_search %}
-                      <option value="{{ region_name }}">{{ region_name }}</option>
-                      {% endfor %}
-                    </select>
+  <div id="hero-area">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 text-center">
+          <div class="contents">
+            <div class="search-bar">
+              <div class="search-inner">
+                <form method="GET" class="search-form"
+                      action="{% url 'ads-search' %}">
+                  <!-- <div class="form-group inputwithicon">
+                    <i class="lni-tag"></i>
+                    <input type="text" name="customword" class="form-control" placeholder="Enter Product Keyword">
+                  </div> -->
+                  <div class="form-group inputwithicon">
+                    <i class="lni-map-marker"></i>
+                    <div class="select">
+                      <select name="region_name">
+                        <option disabled selected>
+                          Регион
+                        </option>
+                        {% for region_name in region_search %}
+                          <option value="{{ region_name }}">{{ region_name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group inputwithicon">
-                  <i class="lni-menu"></i>
-                  <div class="select">
-                    <select name="category_name">
-                      <option selected="true" disabled="disabled">Категория</option>
-                      {% for category_name in category_search %}
-                      <option value="{{ category_name }}">{{ category_name }}</option>
-                      {% endfor %}
-                    </select>
+                  <div class="form-group inputwithicon">
+                    <i class="lni-menu"></i>
+                    <div class="select">
+                      <select name="category_name">
+                        <option disabled selected>
+                          Категория
+                        </option>
+                        {% for category_name in category_search %}
+                          <option value="{{ category_name }}">{{ category_name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <button class="btn btn-common" type="submit"><i class="lni-search"></i> Поиск</button>
-              </form>
+                  <button class="btn btn-common"
+                          type="submit"><i
+                          class="lni-search"></i> Поиск
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-xs-12">
-      <!-- Featured Ads Listings Starts -->
-      <section id="featured" class="section-padding">
-        <h1 class="section-title">Избранное</h1>
-        <div class="row">
-          {% for featured_ad in featured_ads %}
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-            <div class="featured-box">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12">
 
-              <figure>
+        <section class="featured section-padding">
+          <div class="container">
+            <h1 class="section-title">Последнее</h1>
+            <div class="row">
+              {% for recent_ad in recent_ads %}
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                  <div class="featured-box">
+                    <figure>
+                      <a href="{% url 'ads-detail' recent_ad.id %}">
+                        {% for img in recent_ad.adsimages_set.all %}
+                          {% if forloop.first %}
+                            <img class="img-fluid"
+                                 src="{{ img.image.url }}"
+                                 alt="">
+                          {% endif %}
+                        {% endfor %}
+                      </a>
+                    </figure>
 
-                {% for img in featured_ad.adsimages_set.all %}
-                {% if forloop.first %}
-                <a href="{% url 'ads-detail' featured_ad.id %}"><img class="img-fluid" src="{{ img.image.url }}"
-                    alt=""></a>
-                {% endif %}
-                {% endfor %}
+                    <div class="feature-content">
 
-              </figure>
+                      <div class="product">
+                        <a href="{% url 'category-archive' recent_ad.category.slug %}"><i
+                                class="lni-folder"></i>{{ recent_ad.category }}
+                        </a>
+                      </div>
 
-              <div class="feature-content">
-                <div class="product">
-                  <a href="{% url 'category-archive' featured_ad.category.slug %}"><i class="lni-folder"></i>
-                    {{ featured_ad.category }}</a>
+                      <h4>
+                        <a href="{% url 'ads-detail' recent_ad.id %}">{{ recent_ad.title }}</a>
+                      </h4>
+                      <span>Дата: {{ recent_ad.date_created }}</span>
+                      <ul class="address">
+                        <li>
+                          <i class="lni-map-marker"></i>{{ recent_ad.city }}, {{ recent_ad.region }}
+                        </li>
+                        <li>
+                          <i class="lni-alarm-clock"></i>{{ recent_ad.date_created | date }}
+                        </li>
+                        <li>
+                          <i class="lni-user"></i> {{ recent_ad.author }}
+                        </li>
+                        <li>
+                          <i class="lni-package"></i>{{ recent_ad.condition }}
+                        </li>
+                      </ul>
+                      <div class="listing-bottom">
+                        <h3 class="price float-left">
+                          ₽ {{ recent_ad.price }}</h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h4><a href="{% url 'ads-detail' featured_ad.id %}">{{ featured_ad.title }}</a></h4>
-                <span>Posted at: {{ featured_ad.date_created }}</span>
-                <ul class="address">
-                  <li>
-                    <i class="lni-map-marker"></i>{{ featured_ad.city }}, {{ featured_ad.region }}
-                  </li>
-                  <li>
-                    <i class="lni-alarm-clock"></i> {{ featured_ad.date_created|date }}
-                  </li>
-                  <li>
-                   <i class="lni-user"></i> {{ featured_ad.author }}
-                  </li>
-                  <li>
-                    <i class="lni-package"></i> {{ featured_ad.condition }}
-                  </li>
-                </ul>
-                <div class="listing-bottom">
-                  <h3 class="price float-left">$ {{ featured_ad.price }}</h3>
-                  <p href="#" class="btn-verified float-right"><i class="lni-check-box"></i>
-                    Verified Ad</p>
-                </div>
-              </div>
+              {% endfor %}
+
             </div>
           </div>
-          {% endfor %}
-        </div>
-      </section>
+        </section>
 
-      <section class="section-padding">
-        <div class="container">
-          <h1 class="section-title">По категориям</h1>
-          <div class="row">
-            {% for category in category_listing %}
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <a style="font-size: 18px; color: #89613A; line-height: 2;" href="{% url 'category-archive' category.slug %}">
-                <i class="lni-folder"></i>
-                {{ category }}
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
-
-      <section class="section-padding">
-        <div class="container">
-          <h1 class="section-title">По регионам</h1>
-          <div class="row">
-            {% for region in region_listing %}
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
-              <a style="font-size: 18px; color: #89613A;" href="{% url 'region-archive' region.slug %}">
-                <i class="lni-map-marker"></i>
-                {{ region }}
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
-
-      <section class="featured section-padding">
-        <div class="container">
-          <h1 class="section-title">Последнее</h1>
-          <div class="row">
-            {% for recent_ad in recent_ads %}
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-              <div class="featured-box">
-
-                <figure>
-
-                  <a href="{% url 'ads-detail' recent_ad.id %}">
-                    {% for img in recent_ad.adsimages_set.all %}
-                    {% if forloop.first %}
-                    <img class="img-fluid" src="{{ img.image.url }}" alt="">
-                    {% endif %}
-                    {% endfor %}
+        <section class="section-padding">
+          <div class="container">
+            <h1 class="section-title">По категориям</h1>
+            <div class="row">
+              {% for category in category_listing %}
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <a style="font-size: 18px; color: #89613A; line-height: 2;"
+                     href="{% url 'category-archive' category.slug %}">
+                    <i class="lni-folder"></i>
+                    {{ category }}
                   </a>
-                </figure>
-
-                <div class="feature-content">
-                  <div class="product">
-                    <a href="{% url 'category-archive' recent_ad.category.slug %}"><i
-                        class="lni-folder"></i>{{ recent_ad.category }}</a>
-                  </div>
-                  <h4><a href="{% url 'ads-detail' recent_ad.id %}">{{ recent_ad.title}}</a></h4>
-                  <span>Posted at: {{ recent_ad.date_created}}</span>
-                  <ul class="address">
-                    <li>
-                      <i class="lni-map-marker"></i>{{ recent_ad.city}}, {{ recent_ad.region}}
-                    </li>
-                    <li>
-                      <i class="lni-alarm-clock"></i>{{ recent_ad.date_created | date}}
-                    </li>
-                    <li>
-                      <i class="lni-user"></i> {{ recent_ad.author }}
-                    </li>
-                    <li>
-                      <i class="lni-package"></i>{{ recent_ad.condition }}
-                    </li>
-                  </ul>
-                  <div class="listing-bottom">
-                    <h3 class="price float-left">$ {{ recent_ad.price }}</h3>
-                    <p class="btn-verified float-right"><i class="lni-check-box"></i> Verified
-                      Ad</p>
-                  </div>
                 </div>
-              </div>
+              {% endfor %}
             </div>
-            {% endfor %}
-
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
 
+        <section class="section-padding">
+          <div class="container">
+            <h1 class="section-title">По регионам</h1>
+            <div class="row">
+              {% for region in region_listing %}
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+                  <a style="font-size: 18px; color: #89613A;"
+                     href="{% url 'region-archive' region.slug %}">
+                    <i class="lni-map-marker"></i>
+                    {{ region }}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
   </div>
-</div>
 
 
 {% endblock content %}

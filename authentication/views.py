@@ -97,7 +97,7 @@ def login_view(request):
             return redirect(redirect_url)
         else:
             messages.error(request,
-                           f"Oops! Username or Password is invalid. Please try again.")
+                           f"Неверное имя пользователя или пароль. Пожалуйста, попробуйте снова.")
 
     return render(request, 'authentication/login.html')
 

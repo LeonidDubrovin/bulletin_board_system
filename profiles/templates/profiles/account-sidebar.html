@@ -5,24 +5,28 @@
     <div class="sidebar-box">
       <div class="user">
         <figure>
-          <a href="#"><img style="width: 100px;" src="{{ request.user.author.profile_pic.url }}" alt="" class="rounded-circle"></a>
+          <a href="#"><img style="width: 100px;"
+                           src="{{ request.user.author.profile_pic.url }}"
+                           alt="" class="rounded-circle"></a>
         </figure>
         <div class="usercontent">
           <h3>{{ user.username }}</h3>
         </div>
         <div class="user-info">
-          <p><i class="lni-envelope"></i> Электронная почта @ {{ user.email }}</p>
-          <p><i class="lni-calendar"></i> Присоединился @ {{ user.date_joined|date }}</p>
+          <p><i class="lni-envelope"></i> Электронная почта @ {{ user.email }}
+          </p>
+          <p><i class="lni-calendar"></i> Присоединился
+            @ {{ user.date_joined|date }}</p>
         </div>
-        
+
 
       </div>
       <nav class="navdashboard">
         <ul>
           <li>
-            <a class="active" href="{% url 'dashboard' %}">
+            <a class="active" href="{% url 'my-ads' %}">
               <i class="lni-dashboard"></i>
-              <span>Dashboard</span>
+              <span>Мои объявления</span>
             </a>
           </li>
           <li>
@@ -31,36 +35,14 @@
               <span>Настройки учетной записи</span>
             </a>
           </li>
-{% comment %}
-          <li>
-            <a href="{% url 'profile-ads' %}">
-              <i class="lni-layers"></i>
-              <span>My Ads</span>
-            </a>
-          </li>
 
-
-          <li>
-            <a href="{% url 'profile-favorite-ads' %}">
-              <i class="lni-heart"></i>
-              <span>Favourite Ads</span>
-            </a>
-          </li>
-{% endcomment %}
           <li>
             <a href="{% url 'logout' %}">
               <i class="lni-enter"></i>
               <span>Выход</span>
             </a>
           </li>
-{% comment %}
-          <li>
-            <a href="{% url 'profile-close' %}">
-              <i class="lni-close"></i>
-              <span>Account close</span>
-            </a>
-          </li>
-          {% endcomment %}
+
         </ul>
       </nav>
     </div>

@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 
-<!-- Page Header Start -->
 <div class="page-header">
   <div class="container">
     <div class="row">
@@ -15,9 +14,7 @@
     </div>
   </div>
 </div>
-<!-- Page Header End -->
 
-<!-- Content section Start -->
 <section class="login section-padding">
   <div class="container">
     <div class="row justify-content-center">
@@ -27,7 +24,6 @@
             Вход
           </h3>
 
-          <!-- Error message start -->
           {% if messages %}
           <div class="error-msg">
             {% for message in messages %}
@@ -35,7 +31,6 @@
             {% endfor %}
           </div>
           {% endif %}
-          <!-- Error message end -->
 
           <form method="POST" action="" role="form" class="login-form">
             {% csrf_token %}
@@ -68,5 +63,5 @@
     </div>
   </div>
 </section>
-<!-- Content section End -->
+
 {% endblock content %}

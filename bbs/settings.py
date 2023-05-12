@@ -25,8 +25,9 @@ SECRET_KEY = "django-insecure-$g0$84(3=nk(#ds-f($5y3_2r9j)slh0#x^0^bnssp$1@50pye
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "http://127.0.0.1:8000"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -133,6 +134,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
 
 # CACHES = {
 #     'default': {

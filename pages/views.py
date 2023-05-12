@@ -3,7 +3,7 @@ from ads.models import Ads, Region, Category
 
 
 def home(request):
-    recent_ads = Ads.objects.filter(is_active=True).order_by('date_created')[0:3]
+    recent_ads = Ads.objects.filter(is_active=True).order_by('-date_created')[0:6]
     featured_ads = Ads.objects.filter(is_featured=True).filter(is_active=True)
     category_listing = Category.objects.all()
     region_listing = Region.objects.all()

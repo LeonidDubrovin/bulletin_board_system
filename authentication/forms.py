@@ -14,28 +14,28 @@ class UserRegistrationForm(UserCreationForm):
         'type': 'text',
         'class': 'form-control',  
         'name': 'username', 
-        'placeholder': 'Username'
+        'placeholder': 'Имя пользователя'
     }))
 
     password1 = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'password',
         'class': 'form-control',  
         'name': 'password1', 
-        'placeholder': 'Password'
+        'placeholder': 'Пароль'
     }))
 
     password2 = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'password',
         'class': 'form-control',  
         'name': 'password2', 
-        'placeholder': 'Retype Password'
+        'placeholder': 'Повторите пароль'
     }))
     
     email = forms.EmailField(required=True)
     email = forms.EmailField(widget=forms.TextInput(attrs={
         'type': 'email',
         'class': 'form-control',  
-        'placeholder': 'Email Address'
+        'placeholder': 'Электронная почта'
     }))
     
     class Meta:
@@ -45,9 +45,8 @@ class UserRegistrationForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         duplicate_email = User.objects.filter(email=email).exists()
-        print("Email Taken")
         if duplicate_email:
-            raise forms.ValidationError("This Email address is already in use.")
+            raise forms.ValidationError("Этот адрес электронной почты уже используется.")
         return email
 
 
@@ -55,13 +54,13 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={
         'type': 'email',
         'class': 'form-control',  
-        'placeholder': 'Email Address'
+        'placeholder': 'Электронная почта'
     }))
 
     def clean_email(self):
         email = self.cleaned_data['email']
         if not User.objects.filter(email__iexact=email, is_active=True).exists():
-            raise forms.ValidationError("There is no user registered with the specified email address!")
+            raise forms.ValidationError("Пользователь с указанным адресом электронной почты не зарегистрирован.")
 
         return email
 
@@ -71,36 +70,36 @@ class EmailSetPassword(SetPasswordForm):
         'type': 'password',
         'class': 'form-control',  
         'name': 'new_password1', 
-        'placeholder': 'Password'
+        'placeholder': 'Пароль'
     }))
 
     new_password2 = forms.CharField(label="", widget=forms.TextInput(attrs={
         'type': 'password',
         'class': 'form-control',  
         'name': 'new_password2', 
-        'placeholder': 'Retype Password'
+        'placeholder': 'Повторите пароль'
     }))
 
 
 class UserUpdateForm(ModelForm):
-    first_name = forms.CharField(label="First Name", widget=forms.TextInput(attrs={
+    first_name = forms.CharField(label="Имя", widget=forms.TextInput(attrs={
         'type': 'text',
         'class': 'form-control',  
-        'name': 'first_name', 
+        'name': 'first_name',
         'placeholder': 'Имя'
     }))
 
-    last_name = forms.CharField(label="Last Name", widget=forms.TextInput(attrs={
+    last_name = forms.CharField(label="Фамилия", widget=forms.TextInput(attrs={
         'type': 'text',
         'class': 'form-control',  
         'name': 'last_name', 
         'placeholder': 'Фамилия'
     }))
 
-    email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={
+    email = forms.EmailField(label="Почта", widget=forms.TextInput(attrs={
         'type': 'email',
         'class': 'form-control',  
-        'placeholder': 'Email Address'
+        'placeholder': 'Электронная почта'
     }))
 
     class Meta:
