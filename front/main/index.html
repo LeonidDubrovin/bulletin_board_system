@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Главная страница</title>
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav_logo"><img src="../images/Logo.svg" alt="TailTrail (логотип)" /></a>
+            
+            <ul class="nav_items">
+                <li class="nav_item">
+                    <a href="#" class="nav_link">Карта</a>
+                    <a href="#" class="nav_link">Объявления</a>
+                    <a href="#" class="nav_link" id="create">Создать объявление</a>
+                </li>
+            </ul>
+            
+            <button class="btn" id="form-open"><img src="../images/Key.svg" alt="Кнопка входа" /></button>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="main">
+        <!--<div class="bckgrnd">
+            <img src="../images/Background.png" />
+        </div>-->
+        <div class="form_container">
+            <i class="uil uil-times form_close"></i>
+            <!-- Login form -->
+            <div class="form login_form">
+                <form action="#">
+                    <h2>Авторизация</h2>
+                    
+                    <div class="input_box">
+                        <input type="email" id="l_em" placeholder="Введите свой email" required />
+                        <i class="uil uil-envelope-alt"></i>
+                    </div>
+                    
+                    <div class="input_box">
+                        <input type="password" id="l_pw" placeholder="Введите свой пароль" required />
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+                    
+                    <div class="option_field">
+                        <span class="checkbox">
+                            <input type="checkbox" id="check">
+                            <label for="check">Запомнить меня</label>
+                        </span>
+                        <a href="#" class="forgot_pw">Забыли пароль?</a>
+                    </div>
+                    
+                    <button class="btn" id="login-btn" action="submit">Войти</button>
+
+                    <div class="login_signup">
+                        Ещё нет аккаунта? <a href="#" id="signup">Зарегистрируйтесь</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Signup form -->
+            <div class="form signup_form">
+                <form action="#">
+                    <h2>Регистрация</h2>
+                    
+                    <div class="input_box">
+                        <input type="text" id="un" placeholder="Как к Вам обращаться?" required />
+                        <i class="uil uil-user"></i>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="email" id="s_em" placeholder="Введите свой email" required />
+                        <i class="uil uil-envelope-alt"></i>
+                    </div>
+                    
+                    <div class="input_box">
+                        <input type="password" id="s_pw1" placeholder="Создайте пароль" required />
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="password" id="s_pw2" placeholder="Подтвердите пароль" required />
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+                    
+                    <button class="btn" id="signup-btn" action="submit">Зарегистрироваться</button>
+
+                    <div class="login_signup">
+                        Уже имеется аккаунт? <a href="#" id="login">Войдите</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Main content -->
+        <section class="main__content">
+            <div class="container">
+                <div class="vitrina">
+                    <div class="list">
+                        <div class="item item__one">
+                            <div class="item__content">
+                                <span class="item__price">
+                                    12 000 p.
+                                </span>
+                                <span class="item__name">
+                                    Холодильник SAMSUNG
+                                </span>
+                            </div>
+                        </div>           
+                        <div class="item item__two">
+                            <div class="item__content">
+                                <span class="item__price">
+                                    5 p.
+                                </span>
+                                <span class="item__name">
+                                    Печать документов
+                                </span>
+                            </div>
+                        </div>            
+                        <div class="item item__three">
+                            <div class="item__content">
+                                <span class="item__price">
+                                    4 500 p.
+                                </span>
+                                <span class="item__name">
+                                    Пылесос KARCHER
+                                </span>
+                            </div>
+                        </div>               
+                    </div>
+                    <div class="list__btn">
+                        <a class="all_btn all__items" id="all" href="#">Показать все объявления</a>
+                    </div>
+                </div>            
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <ul class="footer_items">
+            <li class="footer_item">
+                <a href="#" class="footer_link">Политика конфиденциальности</a>
+                <a href="#" class="footer_link">Пользовательское соглашение</a>
+                <a href="#" class="footer_link">DormTrade</a>
+                <div class="media-icons">
+                    <a href="#"><i class="uil uil-vk-alt"></i></a>
+                    <a href="#"><i class="uil uil-telegram-alt"></i></a>
+                    <a href="#"><i class="uil uil-whatsapp"></i></a>
+                </div>
+            </li>
+        </ul>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
